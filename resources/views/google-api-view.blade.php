@@ -26,7 +26,17 @@
         <h4>Результат:</h4>
         <div id="result">...</div>
     </div>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <a href="{{ route('start-api') }}" _target="blanc" class="btn btn-warning">Start sending</a>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
 </div>
 
 <script
