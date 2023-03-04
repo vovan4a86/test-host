@@ -13,18 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@showIndex')->name('main');
 
-Route::get('google-api', function () {
-    return view('google-api-view');
-})->name('google-api');
+Route::get('google-api', 'PageController@showGoogleApi')->name('google-api');
 
-Route::get('/test1', function () {
-    return view('test1');
-})->name('test1');
+Route::get('/test1', 'PageController@showTest1')->name('test1');
 
-Route::get('/test2', function () {
-    return view('test2');
-})->name('test2');
+Route::get('/test2', 'PageController@showTest2')->name('test2');
