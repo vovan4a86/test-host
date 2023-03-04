@@ -25,6 +25,7 @@
         <h4>Результат:</h4>
         <div id="result">...</div>
     </div>
+    <a href="{{ route('start-api') }}" _target="blanc" class="btn btn-warning">Start sending</a>
 </div>
 
 <script
