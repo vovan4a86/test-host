@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PageController@showIndex')->name('main');
 
-Route::get('google-api', 'PageController@showGoogleApi')->name('google-api');
+Route::get('/google-api', 'PageController@showGoogleApi')->name('google-api');
 
 Route::get('/test1', 'PageController@showTest1')->name('test1');
 
