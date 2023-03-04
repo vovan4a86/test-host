@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+{{--        <meta name="google-signin-client_id" content="228073646967-ii3iija2j8ti2vg36sb5vbfu71fi1g3d.apps.googleusercontent.com">--}}
 
         <title>Laravel</title>
 
@@ -97,5 +98,11 @@
                 </div>
             </div>
         </div>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <div id="g_id_onload"
+             data-client_id="228073646967-ii3iija2j8ti2vg36sb5vbfu71fi1g3d.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin" data-type="standard"></div>
     </body>
 </html>
