@@ -19,7 +19,7 @@ if (!filter_var($url, FILTER_VALIDATE_URL)) {
 
 $client = new Google_Client();
 // file-containing-secret-key.json - секретный ключ для доступа к API Google
-$client->setAuthConfig('/api/my-project-test.json');
+$client->setAuthConfig(public_path('/api/my-project-test.json'));
 $client->addScope('https://www.googleapis.com/auth/indexing');
 $httpClient = $client->authorize();
 $endpoint = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
