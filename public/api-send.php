@@ -2,6 +2,8 @@
 
 //require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+use Barryvdh\Debugbar\Facades\Debugbar;
+
 $data = [
     'result' => 'success'
 ];
@@ -13,6 +15,8 @@ $type = $action == 'update' ? 'URL_UPDATED' : 'URL_DELETED';
 if (!filter_var($url, FILTER_VALIDATE_URL)) {
     $data['result'] = 'error';
     $data['error'] = 'URL не является корректным.';
+    Debugbar::log('URL не является корректным.');
+    Debugbar::log($data);
     echo json_encode($data);
     exit();
 }
@@ -34,5 +38,8 @@ if ($action == 'get') {
 }
 
 $data['body'] = (string) $response->getBody();
+
+Debugbar::log('response');
+Debugbar::log($data);
 
 echo json_encode($data);
