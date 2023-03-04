@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel Testing Project
                 </div>
 
                 <div class="links">
@@ -93,7 +93,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
-                    <a href="/">Home</a>
+                    <a href="{{ route('google-api') }}">Try Google Api</a>
                 </div>
             </div>
         </div>
