@@ -22,9 +22,9 @@ Route::get('google-api', function () {
 })->name('google-api');
 
 Route::get('/test1', function () {
-    return 'Test 1 show';
+    return view('test1');
 })->name('test1');
 
 Route::get('/test2', function () {
-    return 'Test 2 show';
+    return view('test2');
 })->name('test2');
