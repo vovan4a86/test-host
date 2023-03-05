@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 {{--        <meta name="google-signin-client_id" content="228073646967-ii3iija2j8ti2vg36sb5vbfu71fi1g3d.apps.googleusercontent.com">--}}
-
+        <META NAME="robots" CONTENT="noindex,nofollow">
         <title>Laravel</title>
 
         <!-- Fonts -->
