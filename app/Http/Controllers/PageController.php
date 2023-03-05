@@ -6,6 +6,8 @@ use Google_Client;
 use Google_Service_Indexing;
 use Google_Service_Indexing_UrlNotification;
 use Illuminate\Http\Request;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class PageController extends Controller {
 
@@ -18,7 +20,15 @@ class PageController extends Controller {
     }
 
     public function showTest1() {
-        return view('test1');
+        $process = new Process(array('python3', public_path('/py/test.py'), 'https://youtu.be/et2TFY6knBI'));
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        $process->getOutput();
+        return view('test1')->with('process', $process);
+
     }
 
     public function showTest2() {

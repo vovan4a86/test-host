@@ -13,6 +13,13 @@
 <body>
 <div class="container">
     <h1>Test 1 Shows</h1>
+    @if($process)
+        @foreach($process as $p)
+            <p style="color: green;">{{ $p }}</p>
+        @endforeach
+    @else
+        <p style="color: red;">no process</p>
+    @endif
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
