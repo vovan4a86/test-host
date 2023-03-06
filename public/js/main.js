@@ -66,17 +66,16 @@ function getFileFromUrl(e) {
 function sendIndexNow(elem, e) {
     const token = $('meta[name="csrf-token"]').attr('content');
 
-    console.log(token);
+    // console.log(token);
 
-    // $.ajax({
-    //     url: "/send-index-now",
-    //     type: "POST",
-    //     data:{
-    //         "_token": $('meta[name="csrf-token"]').attr('content'),
-    //         url:url,
-    //     },
-    //     success:function(response){
-    //         console.log(response);
-    //     },
-    // });
+    $.ajax({
+        url: "/send-index-now",
+        type: "POST",
+        data:{
+            "_token": token,
+        },
+        success:function(response){
+            console.log(response);
+        },
+    });
 }
