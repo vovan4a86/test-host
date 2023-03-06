@@ -109,18 +109,20 @@ class PageController extends Controller {
             'urlList' => $list_url
         ];
 
-        $dir = public_path('sitemaps/json/');
-        try {
-            if (!is_dir($dir)) {
-                mkdir($dir, 0777, true);
-            }
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            Debugbar::warning($e->getMessage());
-            return response()->json(['success' => false, 'dir' => $dir]);
-        }
+        $client = new Client();
+        $client->request('POST', 'https://yandex.com/indexnow', [
+            'headers' => [
+                'Content-Type' => 'application/json; charset=utf-8',
+                'Host' => 'yandex.com'
+            ],
+            'json' => $data]);
 
+        return ['success' => true, 'data' => $data];
 
+//        $dir = public_path('sitemaps/json/');
+//        if (!is_dir($dir)) {
+//            mkdir($dir, 0777, true);
+//        }
 
 //        file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
 
