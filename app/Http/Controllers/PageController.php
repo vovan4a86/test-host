@@ -110,14 +110,20 @@ class PageController extends Controller {
         ];
 
         $client = new Client();
-        $client->request('POST', 'https://yandex.com/indexnow', [
-            'headers' => [
-                'Content-Type' => 'application/json; charset=utf-8',
-                'Host' => 'yandex.com'
-            ],
-            'json' => $data]);
+        try {
+            $client->request('POST', 'https://yandex.com/indexnow', [
+                'headers' => [
+                    'Content-Type' => 'application/json; charset=utf-8',
+                    'Host' => 'yandex.com'
+                ],
+                'json' => $data]);
+            return ['success' => true, 'data' => $data];
+        } catch (GuzzleException $e) {
+            Debugbar::error($e->getMessage());
+            return ['success' => false];
+        }
 
-        return ['success' => true, 'data' => $data];
+
 
 //        $dir = public_path('sitemaps/json/');
 //        if (!is_dir($dir)) {
