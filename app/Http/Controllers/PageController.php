@@ -108,15 +108,21 @@ class PageController extends Controller {
             'keyLocation' => route('main') . '/4f9527fd1d5843b3b272e0d10184c570.txt',
             'urlList' => $list_url
         ];
-        $dir = 'sitemaps/json/';
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
+
+        $dir = public_path('sitemaps/json/');
+        try {
+            if (!is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Debugbar::warning($e->getMessage());
+            return response()->json(['success' => false]);
         }
-        return response()->json(['success' => true]);
+
+
 
 //        file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
-
-
 
         $dir = public_path('sitemaps/json/');
         $files = scandir($dir);
