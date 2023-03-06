@@ -69,7 +69,7 @@ function sendIndexNow() {
     // console.log(token);
     $.ajax({
         url: "/send-index-now",
-        type: "GET",
+        type: "POST",
         data: {
             "_token": token,
         },
