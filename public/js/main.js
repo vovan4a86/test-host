@@ -52,12 +52,12 @@ function getFileFromUrl(e) {
 
     $.ajax({
         url: "/get-file",
-        type:"POST",
-        data:{
+        type: "POST",
+        data: {
             "_token": $('meta[name="csrf-token"]').attr('content'),
-            url:url,
+            url: url,
         },
-        success:function(response){
+        success: function (response) {
             console.log(response);
         },
     });
@@ -67,23 +67,21 @@ function sendIndexNow(elem, e) {
     const token = $('meta[name="csrf-token"]').attr('content');
 
     // console.log(token);
+    $.ajax({
+        url: "/send-index-now",
+        type: "POST",
+        data: {
+            "_token": token,
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.log("Error!" + xhr.status);
+            console.log("Error!" + error);
+            console.log("Error!" + xhr);
+        },
+    });
 
-    try {
-        $.ajax({
-            url: "/send-index-now",
-            type: "POST",
-            data:{
-                "_token": token,
-            },
-            success:function(response){
-                console.log(response);
-            },
-            error: function(xhr, status, error){
-                alert("Error!" + xhr.status);
-            },
-        });
-    } catch (e) {
-        console.log(e)
-    }
 
 }
