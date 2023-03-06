@@ -67,15 +67,17 @@ function sendIndexNow(elem, e) {
     const url = $(elem).attr('href');
     let res = $('#res');
 
-    $.ajax({
-        url: "/send-index-now",
-        type: "POST",
-        data:{
-            "_token": $('meta[name="csrf-token"]').attr('content'),
-            url:url,
-        },
-        success:function(response){
-            console.log(response);
-        },
-    });
+    console.log('123')
+
+    // $.ajax({
+    //     url: "/send-index-now",
+    //     type: "POST",
+    //     data:{
+    //         "_token": $('meta[name="csrf-token"]').attr('content'),
+    //         url:url,
+    //     },
+    //     success:function(response){
+    //         console.log(response);
+    //     },
+    // });
 }
