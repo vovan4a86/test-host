@@ -119,8 +119,7 @@ class PageController extends Controller {
                 'json' => $data]);
             return ['success' => true, 'data' => $data];
         } catch (GuzzleException $e) {
-            Debugbar::error($e->getMessage());
-            return ['success' => false];
+            return ['success' => false, 'error' => $e->getMessage()];
         }
 
 
