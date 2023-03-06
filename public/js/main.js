@@ -73,13 +73,13 @@ function sendIndexNow(elem, e) {
         data: {
             "_token": token,
         },
+        dataType: 'json',
         success: function (response) {
-            console.log(response);
+            console.log(response.success);
         },
         error: function (xhr, status, error) {
             console.log("Error!" + xhr.status);
             console.log("Error!" + error);
-            console.log("Error!" + xhr);
         },
     });
 
