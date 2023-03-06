@@ -116,7 +116,7 @@ class PageController extends Controller {
                     'Host' => 'yandex.com'
                 ],
                 'json' => $data]);
-            return ['success' => true, 'response' => $response];
+            return ['success' => true, 'response' => json_decode($response)];
         } catch (GuzzleException $e) {
             return ['success' => false, 'error' => $e->getMessage()];
         }
