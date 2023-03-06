@@ -102,8 +102,6 @@ class PageController extends Controller {
             route('test2'),
         ];
 
-        return response()->json(['success' => true]);
-
         $data = [
             'host' => route('main'),
             'key' => '4f9527fd1d5843b3b272e0d10184c570',
@@ -114,6 +112,10 @@ class PageController extends Controller {
         if (!is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
+
+        return response()->json(['success' => true]);
+
+
         file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
 
 
