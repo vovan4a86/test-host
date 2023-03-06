@@ -113,7 +113,7 @@ class PageController extends Controller {
 //            mkdir($dir, 0777, true);
 //        }
 
-        file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
+//        file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
         return response()->json(['success' => true]);
 
 
