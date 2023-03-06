@@ -105,7 +105,7 @@ class PageController extends Controller {
         $data = [
             'host' => route('main'),
             'key' => '4f9527fd1d5843b3b272e0d10184c570',
-            'keyLocation' => route('main') . '/4f9527fd1d5843b3b272e0d10184c570.txt',
+            'keyLocation' => '/4f9527fd1d5843b3b272e0d10184c570.txt',
             'urlList' => $list_url
         ];
 
@@ -119,7 +119,7 @@ class PageController extends Controller {
                 'json' => $data]);
             return ['success' => true, 'data' => $data];
         } catch (GuzzleException $e) {
-            return ['success' => false, 'error' => $e->getMessage()];
+            return ['success' => false, 'key' => $data['keyLocation'], 'error' => $e->getMessage()];
         }
 
 
