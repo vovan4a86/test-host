@@ -115,6 +115,8 @@ class PageController extends Controller {
         }
         file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
 
+        return response()->json(['success' => true]);
+
 
         $dir = public_path('sitemaps/json/');
         $files = scandir($dir);
