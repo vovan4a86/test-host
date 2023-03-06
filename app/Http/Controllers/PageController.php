@@ -103,9 +103,8 @@ class PageController extends Controller {
         ];
 
         $data = [
-            'host' => route('main'),
+            'host' => '1293597-ce05865.tw1.ru',
             'key' => '4f9527fd1d5843b3b272e0d10184c570',
-            'keyLocation' => 'http://1293597-ce05865.tw1.ru/4f9527fd1d5843b3b272e0d10184c570.txt',
             'urlList' => $list_url
         ];
 
