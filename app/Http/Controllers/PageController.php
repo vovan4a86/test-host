@@ -112,9 +112,9 @@ class PageController extends Controller {
         $dir = public_path('sitemaps/json/');
         try {
             if (!is_dir($dir)) {
-                mkdir($dir, 0777, true);
+                $r = mkdir($dir, 0777, true);
             }
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true, 'r' => $r]);
         } catch (\Exception $e) {
             Debugbar::warning($e->getMessage());
             return response()->json(['success' => false]);

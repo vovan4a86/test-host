@@ -74,7 +74,7 @@ function sendIndexNow() {
             "_token": token,
         },
         success: function (response) {
-            console.log(response.success);
+            console.log(response);
         },
         error: function (xhr, status, error) {
             console.log("Error!" + xhr.status);
