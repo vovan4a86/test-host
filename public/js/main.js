@@ -68,14 +68,22 @@ function sendIndexNow(elem, e) {
 
     // console.log(token);
 
-    $.ajax({
-        url: "/send-index-now",
-        type: "POST",
-        data:{
-            "_token": token,
-        },
-        success:function(response){
-            console.log(response);
-        },
-    });
+    try {
+        $.ajax({
+            url: "/send-index-now",
+            type: "POST",
+            data:{
+                "_token": token,
+            },
+            success:function(response){
+                console.log(response);
+            },
+            error: function(xhr, status, error){
+                alert("Error!" + xhr.status);
+            },
+        });
+    } catch (e) {
+        console.log(e)
+    }
+
 }
