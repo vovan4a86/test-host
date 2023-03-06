@@ -110,15 +110,15 @@ class PageController extends Controller {
 
         $client = new Client();
         try {
-            $client->request('POST', 'https://yandex.com/indexnow', [
+            $response = $client->request('POST', 'https://yandex.com/indexnow', [
                 'headers' => [
                     'Content-Type' => 'application/json; charset=utf-8',
                     'Host' => 'yandex.com'
                 ],
                 'json' => $data]);
-            return ['success' => true, 'data' => $data];
+            return ['success' => true, 'response' => $response];
         } catch (GuzzleException $e) {
-            return ['success' => false, 'key' => $data['keyLocation'], 'error' => $e->getMessage()];
+            return ['success' => false, 'error' => $e->getMessage()];
         }
 
 
