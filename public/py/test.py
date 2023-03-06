@@ -7,8 +7,7 @@ def my_hook(d):
         print('Done downloading, now converting')
 
 
-if __name__ == '__main__':
-
+def main():
     try:
         url = sys.argv[1]
     except:
@@ -24,7 +23,7 @@ if __name__ == '__main__':
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             meta = ydl.extract_info(url, download=False)
-            ydl.download([url])
+            # ydl.download([url])
 
         title = meta['title']
         duration = meta['duration'] / 60
@@ -34,3 +33,6 @@ if __name__ == '__main__':
             'file': title + '.mp3'
         }
         print(data)
+
+if __name__ == '__main__':
+    main()

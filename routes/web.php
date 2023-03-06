@@ -22,3 +22,7 @@ Route::get('/start-api', 'PageController@startApi')->name('start-api');
 Route::get('/test1', 'PageController@showTest1')->name('test1');
 
 Route::get('/test2', 'PageController@showTest2')->name('test2');
+
+Route::post('/get-file', 'PageController@getFile');
+
+Route::post('/send-index-now', 'PageController@sendIndexNow');

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Google_Client;
 use Google_Service_Indexing;
 use Google_Service_Indexing_UrlNotification;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -20,27 +23,53 @@ class PageController extends Controller {
     }
 
     public function showTest1() {
-        $process = new Process(array('python3', public_path('/py/test.py'), 'https://youtu.be/et2TFY6knBI'));
-        $process->run();
+//        $process = new Process(array('python3', public_path('/py/test.py'), 'https://youtu.be/et2TFY6knBI'));
+//        $process->run();
+//
+//        if (!$process->isSuccessful()) {
+//            throw new ProcessFailedException($process);
+//        }
+//        $d = $process->getOutput();
+//        $text = utf8_encode($d);
+//        $text = mb_convert_encoding($text, "Windows-1251", "UTF-8");
+//        dd($text);
 
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+        $dir = public_path('output/');
+        $file = null;
+        $name = null;
+        if ($handle = opendir($dir)) {
+            while (false !== ($file = readdir($handle))) {
+                if (preg_match('/\.(mp3)/', $file)) {
+                    $file = $dir . $file;
+                    $name = $file;
+                    break;
+                }
+            }
         }
-        $process->getOutput();
-        return view('test1')->with('process', $process);
-
+//        if($file) return response()->download($file, basename($name));
+//
+//        return 'null';
+        return view('test1')->with('file', $file);
     }
 
-    public function showTest2() {
+    public function getFile() {
+        $url = \request('url');
+
+        return response()->json(['success' => true]);
+    }
+
+    public
+    function showTest2() {
         return view('test2');
     }
 
-    public function startApi() {
+    public
+    function startApi() {
         $urls = [
             'http://45.8.96.6/google-api',
             'http://45.8.96.6/test1',
             'http://45.8.96.6/test2'
-            ];
+        ];
 
         $client = new Google_Client();
 
@@ -64,5 +93,55 @@ class PageController extends Controller {
         foreach ($results as $res) {
             dump($res->getErrors());
         }
+    }
+
+    public function sendIndexNow() {
+        $list_url = [
+            route('main'),
+            route('test1'),
+            route('test2'),
+        ];
+
+
+        $data = [
+            'host' => route('main'),
+            'key' => '4f9527fd1d5843b3b272e0d10184c570',
+            'keyLocation' => route('main') . '/4f9527fd1d5843b3b272e0d10184c570.txt',
+            'urlList' => $list_url
+        ];
+        $dir = public_path('sitemaps/json/');
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+        file_put_contents(public_path('sitemaps/json/') . 'urls' . '.json', json_encode($data));
+
+
+        $dir = public_path('sitemaps/json/');
+        $files = scandir($dir);
+        natcasesort($files); //отсортировать файлы по порядку
+        $client = new Client();
+        $res = [];
+        foreach ($files as $file_name) {
+            if ($file_name != "." && $file_name != "..") {
+                $data = file_get_contents($dir . $file_name);
+                if ($data) {
+                    $res[] = $file_name;
+                    try {
+                        $client->request('POST', 'https://yandex.com/indexnow', [
+                            'headers' => [
+                                'Content-Type' => 'application/json; charset=utf-8',
+                                'Host' => 'yandex.com'
+                            ],
+                            'json' => json_decode($data)]);
+                    } catch (GuzzleException $e) {
+                        DebugBar::warning($e->getMessage());
+                        return ['success' => false, 'file' => $file_name, 'msg' => $e->getMessage()];
+                    }
+                }
+            }
+        }
+
+        array_map("unlink", glob(public_path('/sitemaps/json/*.json')));
+        return ['success' => true, 'files' => $res];
     }
 }

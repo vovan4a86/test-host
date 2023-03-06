@@ -1,27 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <META NAME="robots" CONTENT="noindex,nofollow">
+{{--    <META NAME="robots" CONTENT="noindex,nofollow">--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>Google Api</title>
+    <title>Download from YT</title>
 </head>
 <body>
 <div class="container">
-    <h1>Test 1 Shows</h1>
-    @if($process)
-        @foreach($process as $p)
-            <p style="color: green;">{{ $p }}</p>
-        @endforeach
-    @else
-        <p style="color: red;">no process</p>
-    @endif
+    <h1>Download from YT</h1>
+    <div class="mb-3 mt-5">
+        <label for="url" class="form-label">URL</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="yt">
+            <button class="btn btn-secondary" type="button" onclick="getFileFromUrl(event)">Get File</button>
+        </div>
+        @if($file)
+            <a href="{{ $file }}" class="btn btn-info">Download</a>
+        @else
+            <p>No file</p>
+        @endif
+    </div>
 </div>
-
+<script
+    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+    crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
         crossorigin="anonymous"></script>
