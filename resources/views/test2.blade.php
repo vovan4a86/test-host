@@ -15,7 +15,7 @@
 <div class="container">
     <h1>Test 2 Shows</h1>
 
-    <button class="btn btn-danger" onclick="sendIndexNow(this, event)">Send api</button>
+    <button class="btn btn-danger" onclick="sendIndexNow()">Send api</button>
     <div id="res"></div>
 </div>
 
