@@ -67,6 +67,11 @@ function sendIndexNow(elem, e) {
     const token = $('meta[name="csrf-token"]').attr('content');
 
     // console.log(token);
+    $.ajaxSetup({
+        headers: {
+            'X_CSRF-TOKEN' : $('meta[name="_token"]').attr('content')
+        }
+    });
     $.ajax({
         url: "/send-index-now",
         type: "POST",
