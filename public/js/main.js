@@ -64,10 +64,9 @@ function getFileFromUrl(e) {
 }
 
 function sendIndexNow(elem, e) {
-    const url = $(elem).attr('href');
-    let res = $('#res');
+    const token = $('meta[name="csrf-token"]').attr('content');
 
-    console.log('123')
+    console.log(token);
 
     // $.ajax({
     //     url: "/send-index-now",
