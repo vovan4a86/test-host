@@ -43,3 +43,5 @@ jobs:
             cd ${{ secrets.PROJECT_FOLDER }};
             git checkout master;
             git pull;
+      - name: Show success
+        run: echo Success
