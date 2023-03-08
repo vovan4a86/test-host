@@ -66,7 +66,6 @@ class PageController extends Controller {
         $process->run();
 
         if (!$process->isSuccessful()) {
-            return ['success' => false, 'error' => $process->getExitCodeText()];
             throw new ProcessFailedException($process);
         }
 
