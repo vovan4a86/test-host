@@ -18,7 +18,7 @@ function getFileFromUrl(e) {
             res.append(link);
         },
         error: function (request, status, error) {
-            alert(request.responseText);
+            console.log(request.responseText);
         }
     });
 }
