@@ -22,39 +22,9 @@ class PageController extends Controller {
         return view('google-api-view');
     }
 
-    public function showTest1() {
-//        $process = new Process(array('python3', public_path('/py/test.py'), 'https://youtu.be/et2TFY6knBI'));
-//        $process->run();
-//
-//        if (!$process->isSuccessful()) {
-//            throw new ProcessFailedException($process);
-//        }
-//        $d = $process->getOutput();
-//        $text = utf8_encode($d);
-//        $text = mb_convert_encoding($text, "Windows-1251", "UTF-8");
-//        dd($text);
-
-        $dir = public_path('output/');
-        $file = null;
-        $name = null;
-        if ($handle = opendir($dir)) {
-            while (false !== ($file = readdir($handle))) {
-                if (preg_match('/\.(mp3)/', $file)) {
-                    $file = $dir . $file;
-                    $name = $file;
-                    break;
-                }
-            }
-        }
-//        if($file) return response()->download($file, basename($name));
-//
-//        return 'null';
-        return view('test1')->with('file', $file);
-    }
-
-    public function getFile() {
+    public function getFile(): array {
         $url = \request('url');
-//        array_map("unlink", glob(public_path('/output/*.mp3')));
+        array_map("unlink", glob(public_path('/output/*.mp3')));
 
 //        $process = new Process(array('python3', 'py/test.py', $url));
         $process = new Process(array('yt-dlp', $url,
@@ -72,7 +42,6 @@ class PageController extends Controller {
 
         $file = null;
         $files = scandir(public_path('/output'));
-//        Debugbar::log($files);
         foreach ($files as $file_name) {
             if ($file_name != '.' || $file_name != '..') {
                 if (preg_match('/\.(mp3)/', $file_name)) {
