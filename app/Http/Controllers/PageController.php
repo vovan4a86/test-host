@@ -54,17 +54,42 @@ class PageController extends Controller {
 
     public function getFile() {
         $url = \request('url');
+//        array_map("unlink", glob(public_path('/output/*.mp3')));
 
-        return response()->json(['success' => true]);
+//        $process = new Process(array('python3', 'py/test.py', $url));
+        $process = new Process(array('yt-dlp', $url,
+            '--output',
+            'output/%(title)s.%(ext)s',
+            '--extract-audio',
+            '--audio-format', 'mp3'
+        ));
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            return ['success' => false, 'error' => $process->getExitCodeText()];
+            throw new ProcessFailedException($process);
+        }
+
+        $file = null;
+        $files = scandir(public_path('/output'));
+//        Debugbar::log($files);
+        foreach ($files as $file_name) {
+            if ($file_name != '.' || $file_name != '..') {
+                if (preg_match('/\.(mp3)/', $file_name)) {
+                    $file = $file_name;
+                    break;
+                }
+
+            }
+        }
+        return ['success' => true, 'file' => '/output/' . $file, 'name' => $file];
     }
 
-    public
-    function showTest2() {
+    public function showTest2() {
         return view('test2');
     }
 
-    public
-    function startApi() {
+    public function startApi() {
         $urls = [
             'http://45.8.96.6/google-api',
             'http://45.8.96.6/test1',
