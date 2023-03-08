@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Download from YT</h1>
+    <h1 class="mt-3">Download from YT</h1>
     <div class="mb-3 mt-5">
         <label for="url" class="form-label">Enter URL:</label>
         <div class="mb-3">
