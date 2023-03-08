@@ -33,13 +33,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run command on remote server
-        uses: D3rHase/ssh-command-action@v0.2.2
+      - name: Run SSH Commands
+        uses: arthurvanl/action-exec-ssh@v2.0.7
         with:
           host: ${{secrets.SSH_HOST}}
-          user: ${{secrets.SSH_USER}}
-          private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          command: |
+          username: ${{secrets.SSH_USER}}
+          password: ${{secrets.SSH_PRIVATE_KEY}}
+          commands: |
             cd ${{ secrets.PROJECT_FOLDER }};
             git checkout master;
             git pull;
