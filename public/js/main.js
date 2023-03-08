@@ -17,6 +17,9 @@ function getFileFromUrl(e) {
             res.append(name);
             res.append(link);
         },
+        error: function (response) {
+            console.log(response.error)
+        }
     });
 }
 
