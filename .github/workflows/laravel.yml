@@ -40,7 +40,4 @@ jobs:
           password: ${{secrets.SSH_PRIVATE_KEY}}
           commands: |
             cd ${{ secrets.PROJECT_FOLDER }};
-            git checkout master;
             git pull;
-      - name: Show success
-        run: echo Success
