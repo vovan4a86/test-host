@@ -23,7 +23,7 @@ function getFileFromUrl(e) {
         success: function (response) {
             btn.prop('disabled', false);
             btn.html('Get File');
-            const name = `<img class="d-block" src="/output/${response.name}.jpg" width="360" height="203" style="border-radius: 12px;"
+            const name = `<img class="d-block" src="/output/${response.name}.jpg" width="360" height="203" style="border-radius: 12px;">
                           <div>${response.name}</div>
                           <a href="${response.file}" type="audio/mp3" download class="btn btn-success mt-2 btn-lg">Download</a>`
             res.append(name);

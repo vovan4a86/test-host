@@ -28,8 +28,7 @@
                 </button>
             </div>
         </div>
-        <div id="res">
-        </div>
+        <div id="res"></div>
     </div>
 </div>
 <script
