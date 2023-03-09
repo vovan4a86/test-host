@@ -13,23 +13,32 @@ function getFileFromUrl(e) {
             url: url,
         },
         beforeSend: function() {
+            btn.prop('disabled', true);
             btn.html(
                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>' +
                 ' Fetching...'
             );
+            res.empty();
         },
         success: function (response) {
+            btn.prop('disabled', false);
             btn.html('Get File');
-            const name = `<div>${response.name}</div>`
-            const link = `<a href="${response.file}" type="audio/mp3" download class="btn btn-success">Download</a>`
+            const name = `<div>${response.name}</div>
+                          <a href="${response.file}" type="audio/mp3" download class="btn btn-success">Download</a>`
             res.append(name);
-            res.append(link);
         },
         error: function (request, status, error) {
+            btn.prop('disabled', false);
             btn.html('Get File');
+            const name = `<div class="text-danger">Error!</div>`
             console.log(request.responseText);
         }
     });
+}
+
+function clearInfo() {
+    $('#yt').val('');
+    $('#res').empty();
 }
 
 function sendIndexNow() {

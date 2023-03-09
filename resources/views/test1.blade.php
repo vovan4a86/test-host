@@ -23,6 +23,8 @@
 {{--                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>--}}
                 Get File
             </button>
+            <button type="button" class="btn btn-danger btn-close mt-2" aria-label="Закрыть"
+            onclick="clearInfo()">Clear</button>
         </div>
         <div id="res"></div>
     </div>
