@@ -72,17 +72,19 @@ class PageController extends Controller {
         }
 
         $file = null;
+        $name = null;
         $files = scandir(public_path('/output'));
         foreach ($files as $file_name) {
             if ($file_name != '.' || $file_name != '..') {
                 if (preg_match('/\.(mp3)/', $file_name)) {
                     $file = $file_name;
+                    $name = preg_replace('/\.(mp3)/', '', $file_name);
                     break;
                 }
 
             }
         }
-        return ['success' => true, 'file' => '/output/' . $file, 'name' => $file];
+        return ['success' => true, 'file' => '/output/' . $file, 'name' => $name];
     }
 
     public function showTest2() {
