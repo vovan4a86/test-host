@@ -121,9 +121,8 @@ class PageController extends Controller {
 
     public function sendIndexNow() {
         $list_url = [
-            route('main'),
-            route('test1'),
-            route('test2'),
+            'http://test1ng.site/test1',
+            'http://test1ng.site/test2',
         ];
 
         $data = [
