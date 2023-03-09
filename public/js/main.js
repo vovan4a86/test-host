@@ -24,7 +24,7 @@ function getFileFromUrl(e) {
             btn.prop('disabled', false);
             btn.html('Get File');
             const name = `<div>${response.name}</div>
-                          <a href="${response.file}" type="audio/mp3" download class="btn btn-success">Download</a>`
+                          <a href="${response.file}" type="audio/mp3" download class="btn btn-success mt-2 btn-lg">Download</a>`
             res.append(name);
         },
         error: function (request, status, error) {

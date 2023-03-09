@@ -60,6 +60,7 @@ class PageController extends Controller {
         $process = new Process(array('yt-dlp', $url,
             '--output',
             'output/%(title)s.%(ext)s',
+            '--write-thumbnail',
             '--extract-audio',
             '--audio-format', 'mp3'
         ));

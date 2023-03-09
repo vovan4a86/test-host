@@ -18,15 +18,18 @@
     <div class="mb-3 mt-5">
         <label for="url" class="form-label">Enter URL:</label>
         <div class="mb-3">
-            <input type="text" class="form-control d-block" id="yt" value="https://youtu.be/et2TFY6knBI">
-            <button class="btn btn-primary mt-2" type="button" onclick="getFileFromUrl(event)">
-{{--                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>--}}
-                Get File
-            </button>
-            <button type="button" class="btn btn-danger btn-close mt-2" aria-label="Закрыть"
-            onclick="clearInfo()">Clear</button>
+            <input type="text" class="form-control d-block" id="yt" value="">
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary mt-2" type="button" onclick="getFileFromUrl(event)">
+                    Get File
+                </button>
+                <button type="button" class="btn btn-danger btn-close mt-2" aria-label="Закрыть"
+                        onclick="clearInfo()">Clear
+                </button>
+            </div>
         </div>
-        <div id="res"></div>
+        <div id="res">
+        </div>
     </div>
 </div>
 <script
