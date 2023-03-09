@@ -127,8 +127,9 @@ class PageController extends Controller {
         ];
 
         $data = [
-            'host' => 'partssolution.ru',
+            'host' => 'test1ng.site',
             'key' => '4f9527fd1d5843b3b272e0d10184c570',
+            "keyLocation" => "http://test1ng.site/4f9527fd1d5843b3b272e0d10184c570.txt",
             'urlList' => $list_url
         ];
 
