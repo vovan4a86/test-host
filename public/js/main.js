@@ -31,6 +31,7 @@ function getFileFromUrl(e) {
             btn.prop('disabled', false);
             btn.html('Get File');
             const name = `<div class="text-danger">Error!</div>`
+            res.append(name);
             console.log(request.responseText);
         }
     });
