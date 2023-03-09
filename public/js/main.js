@@ -30,7 +30,7 @@ function getFileFromUrl(e) {
         error: function (request, status, error) {
             btn.prop('disabled', false);
             btn.html('Get File');
-            const name = `<div class="text-danger">Error!</div>`
+            const name = `<div class="text-danger"><p>Error!</p><p class="text-info">${request.responseText}</p></div>`
             res.append(name);
             console.log(request.responseText);
         }

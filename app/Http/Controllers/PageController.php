@@ -56,11 +56,10 @@ class PageController extends Controller {
         $url = \request('url');
         array_map("unlink", glob(public_path('/output/*.mp3')));
 
-//        $process = new Process(array('python3', 'py/test.py', $url));
+//        $process = new Process(array('python3', 'py/test.py', $url)); '--write-thumbnail',
         $process = new Process(array('yt-dlp', $url,
             '--output',
             'output/%(title)s.%(ext)s',
-            '--write-thumbnail',
             '--extract-audio',
             '--audio-format', 'mp3'
         ));
