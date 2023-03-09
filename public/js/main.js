@@ -1,6 +1,7 @@
 function getFileFromUrl(e) {
     e.preventDefault();
     let res = $('#res');
+    let btn = $('button.btn.btn-primary');
 
     const url = $('#yt').val();
 
@@ -11,13 +12,21 @@ function getFileFromUrl(e) {
             "_token": $('meta[name="csrf-token"]').attr('content'),
             url: url,
         },
+        beforeSend: function() {
+            btn.html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>' +
+                ' Fetching...'
+            );
+        },
         success: function (response) {
+            btn.html('Get File');
             const name = `<div>${response.name}</div>`
             const link = `<a href="${response.file}" type="audio/mp3" download class="btn btn-success">Download</a>`
             res.append(name);
             res.append(link);
         },
         error: function (request, status, error) {
+            btn.html('Get File');
             console.log(request.responseText);
         }
     });

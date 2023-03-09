@@ -19,7 +19,10 @@
         <label for="url" class="form-label">Enter URL:</label>
         <div class="mb-3">
             <input type="text" class="form-control d-block" id="yt" value="https://youtu.be/et2TFY6knBI">
-            <button class="btn btn-secondary mt-2" type="button" onclick="getFileFromUrl(event)">Get File</button>
+            <button class="btn btn-primary mt-2" type="button" onclick="getFileFromUrl(event)">
+{{--                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>--}}
+                Get File
+            </button>
         </div>
         <div id="res"></div>
     </div>
