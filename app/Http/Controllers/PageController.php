@@ -63,10 +63,7 @@ class PageController extends Controller {
             '--write-thumbnail',
             '--downloader=aria2c',
             '--downloader-args',
-            '--min-split-size=1M',
-            '--max-connection-per-server=16',
-            '--max-concurrent-downloads=16',
-            '--split=16',
+            '\'--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16\'',
             $url
         ));
         $process->run();
