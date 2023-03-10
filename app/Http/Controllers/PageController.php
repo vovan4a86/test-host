@@ -59,8 +59,8 @@ class PageController extends Controller {
                     $new_filename = preg_replace("/[^. a-zа-яё\d]/ui", "", $file_name);
                     rename(public_path('/output/') . $file_name,
                              public_path('/output/') . $new_filename);
-                    $dot_index = mb_strpos($new_filename, '.', -1);
-                    $ext = substr($new_filename, $dot_index);
+                    $dot_index = mb_strrpos($new_filename, '.');
+                    $ext = mb_substr($new_filename, $dot_index);
                     Debugbar::info($new_filename);
                     Debugbar::info($dot_index);
                     Debugbar::info($ext);
