@@ -65,14 +65,15 @@ class PageController extends Controller {
                 }
             }
         }
-//        $webp = $ext == '.webp';
-        return [
+        $webp = $ext == '.webp';
+        $newString = mb_convert_encoding([
             'success' => true,
             'file' => $file,
             'name' => $name,
             'thumb' => $thumb,
-//            'webp' => $webp
-        ];
+            'webp' => $webp
+        ], "UTF-8", "auto");
+        return response()->json($newString);
     }
 
 
