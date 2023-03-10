@@ -16,21 +16,21 @@ function getFileFromUrl(e) {
             btn.prop('disabled', true);
             btn.html(
                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>' +
-                ' Fetching...'
+                ' Скачивние...'
             );
             res.empty();
         },
         success: function (response) {
             btn.prop('disabled', false);
-            btn.html('Get File');
+            btn.html('Получить файл');
             const name = `<img class="d-block" src="/output/${response.name}.jpg" width="360" height="203" style="border-radius: 12px;">
                           <div>${response.name}</div>
-                          <a href="${response.file}" type="audio/mp3" download class="btn btn-success mt-2 btn-lg">Download</a>`
+                          <a href="${response.file}" type="audio/mp3" download class="btn btn-success mt-2 btn-lg">Скачать</a>`
             res.append(name);
         },
         error: function (request, status, error) {
             btn.prop('disabled', false);
-            btn.html('Get File');
+            btn.html('Получить файл');
             const name = `<div class="text-danger"><p>Error!</p><p class="text-info">${request.responseText}</p></div>`
             res.append(name);
             console.log(request.responseText);

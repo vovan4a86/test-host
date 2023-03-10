@@ -15,48 +15,18 @@ use Symfony\Component\Process\Process;
 class PageController extends Controller {
 
     public function showIndex() {
-        return view('welcome');
+        return view('pages.welcome');
     }
 
-    public function showGoogleApi() {
-        return view('google-api-view');
-    }
-
-    public function showTest1() {
-//        $process = new Process(array('python3', public_path('/py/test.py'), 'https://youtu.be/et2TFY6knBI'));
-//        $process->run();
-//
-//        if (!$process->isSuccessful()) {
-//            throw new ProcessFailedException($process);
-//        }
-//        $d = $process->getOutput();
-//        $text = utf8_encode($d);
-//        $text = mb_convert_encoding($text, "Windows-1251", "UTF-8");
-//        dd($text);
-
-//        $dir = public_path('output/');
-//        $file = null;
-//        $name = null;
-//        if ($handle = opendir($dir)) {
-//            while (false !== ($file = readdir($handle))) {
-//                if (preg_match('/\.(mp3)/', $file)) {
-//                    $file = $dir . $file;
-//                    $name = $file;
-//                    break;
-//                }
-//            }
-//        }
-//        if($file) return response()->download($file, basename($name));
-//
-//        return 'null';
-        return view('test1');
+    public function showYtdlp() {
+        return view('pages.ytdlp');
     }
 
     public function getFile(): array {
         $url = \request('url');
-        array_map("unlink", glob(public_path('/output/*.mp3')));
 
-//        $process = new Process(array('python3', 'py/test.py', $url));
+        array_map("unlink", glob(public_path('/output/*.*')));
+
         $process = new Process(array('yt-dlp', $url,
             '--output',
             'output/%(title)s.%(ext)s',
@@ -71,24 +41,44 @@ class PageController extends Controller {
             throw new ProcessFailedException($process);
         }
 
-        $file = null;
         $name = null;
+        $file = null;
+        $thumb = null;
         $files = scandir(public_path('/output'));
         foreach ($files as $file_name) {
             if ($file_name != '.' || $file_name != '..') {
                 if (preg_match('/\.(mp3)/', $file_name)) {
-                    $file = $file_name;
-                    $name = preg_replace('/\.(mp3)/', '', $file_name);
+                    $new_filename = preg_replace("/[^.a-zA-Zа-яА-Я]/", "", $file_name);
+                    rename($file_name, $new_filename);
+                    $file = '/output/' . $new_filename;
+                    $name = preg_replace('/\.(mp3)/', '', $new_filename);
                     break;
                 }
-
+                if (preg_match('/\.(jpg|jpeg|webp|png)/', $file_name)) {
+                    $new_filename = preg_replace("/[^.a-zA-Zа-яА-Я]/", "", $file_name);
+                    rename($file_name, $new_filename);
+                    $dot_index = mb_stripos($new_filename, '.');
+                    $ext = substr($new_filename, $dot_index - 1);
+                    $thumb = '/output/' . $name . $ext;
+                    break;
+                }
             }
         }
-        return ['success' => true, 'file' => '/output/' . $file, 'name' => $name];
+        return [
+            'success' => true,
+            'file' => $file,
+            'name' => $name,
+            'thumb' => $thumb
+        ];
+    }
+
+
+    public function showGoogleApi() {
+        return view('pages.google-api-view');
     }
 
     public function showTest2() {
-        return view('test2');
+        return view('pages.test2');
     }
 
     public function startApi() {
