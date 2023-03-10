@@ -22,7 +22,7 @@ class PageController extends Controller {
         return view('pages.ytdlp');
     }
 
-    public function getFile(): array {
+    public function getFile() {
         $url = \request('url');
 
         array_map("unlink", glob(public_path('/output/*.*')));
