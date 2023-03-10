@@ -61,6 +61,8 @@ class PageController extends Controller {
                              public_path('/output/') . $new_filename);
                     $dot_index = mb_strrpos($new_filename, '.');
                     $ext = substr($new_filename, $dot_index);
+                    Debugbar::info($new_filename);
+                    Debugbar::info($ext);
                     $thumb = '/output/' . $name . $ext;
                 }
             }
