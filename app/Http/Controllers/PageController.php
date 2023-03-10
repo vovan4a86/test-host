@@ -22,23 +22,48 @@ class PageController extends Controller {
         return view('pages.ytdlp');
     }
 
+    public function getName() {
+        $url = \request('url');
+
+//        $str = "yt-dlp --print '%(title)s' $url";
+//        $str = "yt-dlp -v";
+//        Debugbar::log($str);
+
+//        $res = [];
+//        exec($str, $res);
+//        Debugbar::log($res);
+
+        $process = new Process(array('yt-dlp',
+            '--print',
+            '%(title)s',
+            $url
+        ));
+        $res = $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        return ['text' => $res];
+
+    }
+
     public function getFile() {
         $url = \request('url');
 
         array_map("unlink", glob(public_path('/output/*.*')));
 
-        $process = new Process(array('yt-dlp', $url,
-            '-x',
+        $process = new Process(array('yt-dlp',
             '--output',
             'output/%(title)s.%(ext)s',
             '--write-thumbnail',
-//            '--extract-audio',
-//            '--audio-format', 'mp3'
+            '--extract-audio',
+            '--audio-format', 'mp3',
+            $url
         ));
         $process->run();
 
         if (!$process->isSuccessful()) {
-//            return ['success' => false, 'error' => $process->getExitCodeText()];
             throw new ProcessFailedException($process);
         }
 

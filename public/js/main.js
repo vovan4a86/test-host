@@ -44,7 +44,7 @@ function getFileFromUrl() {
             res.append(name);
         },
         error: function (request, status, error) {
-            btn.prop('disabled', false);
+            btn.prop('disabled', true);
             btn.html('Получить файл');
             const name = `<div class="text-danger">
                           <p>Error!</p>
@@ -54,6 +54,38 @@ function getFileFromUrl() {
             console.log(status);
         }
     });
+}
+
+function getNameFromUrl() {
+    $.ajax({
+        url: "/get-name",
+        type: "POST",
+        data: {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            url: url,
+        },
+        beforeSend: function () {
+            btn.prop('disabled', true);
+            btn.html(
+                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>' +
+                ' Скачивние...'
+            );
+            res.empty();
+        },
+        success: function (response) {
+            console.log(response.text);
+        },
+        error: function (request, status, error) {
+            btn.prop('disabled', true);
+            btn.html('Получить файл');
+            const name = `<div class="text-danger">
+                          <p>Error!</p>
+                          <p class="text-info">${request.responseText}</p></div>`
+            res.append(name);
+            console.log(request.responseText);
+            console.log(status);
+        }
+    })
 }
 
 function getImage(elem) {
@@ -76,6 +108,7 @@ function getImage(elem) {
         url = 'https://youtu.be/' + urlInput.val();
         btn.prop('disabled', false);
     }
+    getNameFromUrl();
 }
 
 function clearInfo() {
