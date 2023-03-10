@@ -4,8 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class Testing extends Command
-{
+class Testing extends Command {
     /**
      * The name and signature of the console command.
      *
@@ -25,8 +24,7 @@ class Testing extends Command
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
@@ -35,8 +33,13 @@ class Testing extends Command
      *
      * @return int
      */
-    public function handle()
-    {
+    public function handle() {
+        $test = 'Квантовая физика и сознание человека / Антропный принцип участия.mp3';
+        $new_filename = preg_replace("/[^. a-zа-яё\d]/ui", "", $test);
+        $this->info($new_filename);
+        exit();
+
+
         $name = null;
         $file = null;
         $thumb = null;
