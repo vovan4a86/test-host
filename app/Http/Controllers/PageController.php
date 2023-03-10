@@ -28,11 +28,12 @@ class PageController extends Controller {
         array_map("unlink", glob(public_path('/output/*.*')));
 
         $process = new Process(array('yt-dlp', $url,
+            '-x',
             '--output',
             'output/%(title)s.%(ext)s',
             '--write-thumbnail',
-            '--extract-audio',
-            '--audio-format', 'mp3'
+//            '--extract-audio',
+//            '--audio-format', 'mp3'
         ));
         $process->run();
 
@@ -61,14 +62,11 @@ class PageController extends Controller {
                              public_path('/output/') . $new_filename);
                     $dot_index = mb_strrpos($new_filename, '.');
                     $ext = mb_substr($new_filename, $dot_index);
-                    Debugbar::info($new_filename);
-                    Debugbar::info($dot_index);
-                    Debugbar::info($ext);
                     $thumb = '/output/' . $name . $ext;
                 }
             }
         }
-        $webp = $ext == '.webp' || $ext == 'webp'  ? 'webp' : false;
+        $webp = $ext == '.webp';
         $newString = mb_convert_encoding([
             'success' => true,
             'file' => $file,

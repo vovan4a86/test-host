@@ -1,10 +1,11 @@
-function getFileFromUrl(e) {
-    e.preventDefault();
-    let res = $('#res');
-    let btn = $('button.btn.btn-primary');
+let res = $('#res');
+let btn = $('button.btn.btn-primary');
+let err = $('#error');
+let urlInput = $('#yt');
+let switchUrl = $('#switchUrl');
+let url = '';
 
-    const url = $('#yt').val();
-
+function getFileFromUrl() {
     $.ajax({
         url: "/get-file",
         type: "POST",
@@ -24,9 +25,8 @@ function getFileFromUrl(e) {
             btn.prop('disabled', false);
             btn.html('Получить файл');
             let img = '';
-            if (response.webp == 'webp') {
+            if (response.webp) {
                 img = `
-                      <h1>webp</h1>
                       <picture>
                       <source type="image/webp" srcset="${response.thumb}">
                       <img class="d-block" src="${response.thumb}"
@@ -34,7 +34,6 @@ function getFileFromUrl(e) {
                       </picture>`;
             } else {
                 img = `
-                    <h1>img</h1>
                     <img class="d-block" src="${response.thumb}"
                          width="360" height="203" style="border-radius: 12px;">`;
             }
@@ -57,10 +56,35 @@ function getFileFromUrl(e) {
     });
 }
 
-function clearInfo() {
-    $('#yt').val('');
-    $('#res').empty();
+function getImage(elem) {
+    err.empty();
+    if(!switchUrl.is(':checked')) {
+        const result = $(elem).val().startsWith("https://youtu.be/");
+        if(!result) {
+            err.text('Ссылка должна начинаться с https://youtu.be/')
+            btn.prop('disabled', true);
+            return
+        }
+        btn.prop('disabled', false);
+        url = urlInput.val();
+    } else {
+        if(urlInput.val().length < 5) {
+            err.text('Проверьте ID видео');
+            btn.prop('disabled', true);
+            return;
+        }
+        url = 'https://youtu.be/' + urlInput.val();
+        btn.prop('disabled', false);
+    }
 }
+
+function clearInfo() {
+    urlInput.val('');
+    err.empty();
+    res.empty();
+}
+
+
 
 function sendIndexNow() {
     const token = $('meta[name="csrf-token"]').attr('content');
