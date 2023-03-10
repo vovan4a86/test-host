@@ -65,13 +65,13 @@ class PageController extends Controller {
                 }
             }
         }
-        $webp = $ext == '.webp';
+//        $webp = $ext == '.webp';
         return [
             'success' => true,
             'file' => $file,
             'name' => $name,
             'thumb' => $thumb,
-            'webp' => $webp
+//            'webp' => $webp
         ];
     }
 
