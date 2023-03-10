@@ -24,7 +24,7 @@ function getFileFromUrl(e) {
             btn.prop('disabled', false);
             btn.html('Получить файл');
             let img = '';
-            if (response.webp == 1) {
+            if (response.webp == 'webp') {
                 img = `
                       <picture>
                       <source type="image/webp" srcset="${response.thumb}">
