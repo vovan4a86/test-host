@@ -57,6 +57,7 @@ function getFileFromUrl() {
 }
 
 function getNameFromUrl() {
+
     $.ajax({
         url: "/get-name",
         type: "POST",
@@ -83,7 +84,6 @@ function getNameFromUrl() {
                           <p class="text-info">${request.responseText}</p></div>`
             res.append(name);
             console.log(request.responseText);
-            console.log(status);
         }
     })
 }

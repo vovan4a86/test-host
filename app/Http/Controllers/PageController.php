@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Google_Client;
-use Google_Service_Indexing;
-use Google_Service_Indexing_UrlNotification;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
@@ -38,13 +36,14 @@ class PageController extends Controller {
             '%(title)s',
             $url
         ));
-        $res = $process->run();
+
+        $process->run();
 
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
 
-        return ['text' => $res];
+        return ['text' => $process->getOutput()];
 
     }
 
