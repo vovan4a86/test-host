@@ -41,12 +41,26 @@ class PageController extends Controller {
 
         array_map("unlink", glob(public_path('/output/*.*')));
 
+//        $process = new Process(array('yt-dlp',
+//            '--output',
+//            'output/%(title)s.%(ext)s',
+//            '--write-thumbnail',
+//            '--extract-audio',
+//            '--audio-format', 'mp3',
+//            $url
+//        ));
+
+        //yt-dlp -f ba -x --audio-format mp3 --downloader=aria2c --downloader--args '--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16' $URL_HERE
+
         $process = new Process(array('yt-dlp',
+            '-f ba',
+            '-x --audio-format mp3',
             '--output',
             'output/%(title)s.%(ext)s',
             '--write-thumbnail',
-            '--extract-audio',
-            '--audio-format', 'mp3',
+            '--downloader=aria2c',
+            '--downloader--args',
+            '--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16',
             $url
         ));
         $process->run();
