@@ -12,6 +12,7 @@
         <div class="mb-3">
             <input type="text" class="form-control d-block my-3" id="yt" value="" onchange="getImage(this)">
             <div id="error" class="text-danger"></div>
+            <div id="name" class="text-success"></div>
             <div class="d-flex justify-content-between">
                 <button class="btn btn-primary mt-2" type="button" disabled
                         onclick="getFileFromUrl()">

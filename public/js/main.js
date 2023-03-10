@@ -1,6 +1,7 @@
 let res = $('#res');
 let btn = $('button.btn.btn-primary');
 let err = $('#error');
+let nameDiv = $('#name');
 let urlInput = $('#yt');
 let switchUrl = $('#switchUrl');
 let url = '';
@@ -57,7 +58,6 @@ function getFileFromUrl() {
 }
 
 function getNameFromUrl() {
-
     $.ajax({
         url: "/get-name",
         type: "POST",
@@ -66,24 +66,17 @@ function getNameFromUrl() {
             url: url,
         },
         beforeSend: function () {
-            btn.prop('disabled', true);
-            btn.html(
-                '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>' +
-                ' Скачивние...'
-            );
+            nameDiv.html('<div class="spinner-grow" role="status">\n' +
+                         '  <span class="visually-hidden"></span>\n' +
+                         '</div>')
             res.empty();
         },
         success: function (response) {
-            btn.prop('disabled', true);
-            res.text(response.text);
+            nameDiv.empty();
+            nameDiv.html(response.text);
         },
         error: function (request, status, error) {
-            btn.prop('disabled', true);
-            btn.html('Получить файл');
-            const name = `<div class="text-danger">
-                          <p>Error!</p>
-                          <p class="text-info">${request.responseText}</p></div>`
-            res.append(name);
+            nameDiv.html('Не удалось получить имя');
             console.log(request.responseText);
         }
     })
