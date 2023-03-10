@@ -23,28 +23,17 @@ class PageController extends Controller {
     public function getName() {
         $url = \request('url');
 
-//        $str = "yt-dlp --print '%(title)s' $url";
-//        $str = "yt-dlp -v";
-//        Debugbar::log($str);
-
-//        $res = [];
-//        exec($str, $res);
-//        Debugbar::log($res);
-
         $process = new Process(array('yt-dlp',
             '--print',
             '%(title)s',
             $url
         ));
-
         $process->run();
-
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
 
         return ['text' => $process->getOutput()];
-
     }
 
     public function getFile() {

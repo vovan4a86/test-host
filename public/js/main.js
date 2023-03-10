@@ -31,7 +31,7 @@ function getFileFromUrl() {
                       <picture>
                       <source type="image/webp" srcset="${response.thumb}">
                       <img class="d-block" src="${response.thumb}"
-                           width="360" height="200" style="border-radius: 12px;">
+                           width="360" height="203" style="border-radius: 12px;">
                       </picture>`;
             } else {
                 img = `
@@ -66,7 +66,7 @@ function getNameFromUrl() {
             url: url,
         },
         beforeSend: function () {
-            nameDiv.html('<div class="spinner-grow" role="status">\n' +
+            nameDiv.html('<div class="spinner-grow spinner-grow-sm text-primary" role="status">\n' +
                          '  <span class="visually-hidden"></span>\n' +
                          '</div>')
             res.empty();
@@ -111,6 +111,7 @@ function clearInfo() {
     urlInput.val('');
     err.empty();
     res.empty();
+    nameDiv.empty();
 }
 
 
