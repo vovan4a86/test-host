@@ -44,6 +44,7 @@ class PageController extends Controller {
         $name = null;
         $file = null;
         $thumb = null;
+        $ext = '';
         $files = scandir(public_path('/output'));
         foreach ($files as $file_name) {
             if ($file_name != '.' || $file_name != '..') {
@@ -57,16 +58,18 @@ class PageController extends Controller {
                     $new_filename = preg_replace("/[^. a-zа-яё\d]/ui", "", $file_name);
                     rename(public_path('/output/') . $file_name, public_path('/output/') . $new_filename);
                     $dot_index = mb_stripos($new_filename, '.');
-                    $ext = substr($new_filename, $dot_index - 1);
+                    $ext = substr($new_filename, $dot_index);
                     $thumb = '/output/' . $name . $ext;
                 }
             }
         }
+        $w = $ext == '.webp';
         return [
             'success' => true,
             'file' => $file,
             'name' => $name,
-            'thumb' => $thumb
+            'thumb' => $thumb,
+            'webp' => $w
         ];
     }
 
