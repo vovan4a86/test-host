@@ -3,28 +3,28 @@
 @section('title', 'Скачать аудио с YT')
 
 @section('content')
-    <h1 class="mt-3">Скачать аудио с YT</h1>
-    <div class="mb-3 mt-5">
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="switchUrl" onclick="clearInfo()">
-            <label class="form-check-label" for="switchUrl" onclick="clearInfo()">ID вместо ссылки</label>
+    <h1 class="mt-3 text-center">Скачать аудио с YT</h1>
+    <div class="mb-3 mt-3">
+        <div class="d-flex justify-content-between">
+            <div class="form-check form-switch d-flex align-items-center">
+                <input class="form-check-input mb-1" type="checkbox" role="switch" id="switchUrl" onclick="clearInfo()">
+                <label class="form-check-label mx-2" for="switchUrl" onclick="clearInfo()">ID вместо ссылки</label>
+            </div>
+            <button type="button" class="btn btn-danger" aria-label="Очистить"
+                    onclick="clearInfo()">Очистить
+            </button>
         </div>
         <div class="mb-3">
             <input type="text" class="form-control d-block my-3" id="yt" value=""
                    onchange="checkUrl(this)">
             <div id="error" class="text-danger"></div>
             <div id="name" class="text-success"></div>
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-primary mt-2" type="button" disabled
-                        onclick="getFileFromUrl()">
-                    Получить файл
-                </button>
-                <button type="button" class="btn btn-danger mt-2" aria-label="Очистить"
-                        onclick="clearInfo()">Очистить
-                </button>
-            </div>
+            <button class="btn btn-primary mt-2" type="button" disabled
+                    onclick="getFileFromUrl()">
+                Получить файл
+            </button>
         </div>
-        <div id="res"></div>
+        <div id="res" class="text-center"></div>
     </div>
 @endsection
 

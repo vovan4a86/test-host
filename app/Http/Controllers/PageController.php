@@ -63,14 +63,14 @@ class PageController extends Controller {
         foreach ($files as $file_name) {
             if ($file_name != '.' || $file_name != '..') {
                 if (preg_match('/\.(mp3)/', $file_name)) {
-                    $new_filename = preg_replace("/[^. a-zа-яё\d]/ui", "", $file_name);
+                    $new_filename = preg_replace("/[^-+?. a-zа-яё\d]/ui", "", $file_name);
                     rename(public_path('/output/') . $file_name,
                              public_path('/output/') . $new_filename);
                     $file = '/output/' . $new_filename;
                     $name = preg_replace('/\.(mp3)/', '', $new_filename);
                 }
                 if (preg_match('/\.(jpg|jpeg|webp|png)/', $file_name)) {
-                    $new_filename = preg_replace("/[^. a-zа-яё\d]/ui", "", $file_name);
+                    $new_filename = preg_replace("/[^-+?. a-zа-яё\d]/ui", "", $file_name);
                     rename(public_path('/output/') . $file_name,
                              public_path('/output/') . $new_filename);
                     $dot_index = mb_strrpos($new_filename, '.');
