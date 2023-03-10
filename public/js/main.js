@@ -30,7 +30,7 @@ function getFileFromUrl() {
                 img = `
                       <picture>
                       <source type="image/webp" srcset="${response.thumb}">
-                      <img class="d-block" src="${response.thumb}"
+                      <img class="d-block mx-auto mx-lg-0" src="${response.thumb}"
                            width="360" height="203" style="border-radius: 12px;">
                       </picture>`;
             } else {
@@ -39,7 +39,7 @@ function getFileFromUrl() {
                          width="360" height="203" style="border-radius: 12px;">`;
             }
 
-            const name = `<div>${response.name}</div>
+            const name = `<div class="mt-2">${response.name}</div>
                           <a href="${response.file}" type="audio/mp3" download class="btn btn-success mt-2 btn-lg">Скачать</a>`
             res.append(img);
             res.append(name);
@@ -85,6 +85,7 @@ function getNameFromUrl() {
 
 function checkUrl(elem) {
     err.empty();
+    btn.prop('disabled', true);
     if(!switchUrl.is(':checked')) {
         const result = $(elem).val().startsWith("https://youtu.be/");
         if(!result) {
