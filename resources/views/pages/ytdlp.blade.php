@@ -10,7 +10,8 @@
             <label class="form-check-label" for="switchUrl" onclick="clearInfo()">ID вместо ссылки</label>
         </div>
         <div class="mb-3">
-            <input type="text" class="form-control d-block my-3" id="yt" value="" onchange="getImage(this)">
+            <input type="text" class="form-control d-block my-3" id="yt" value=""
+                   onchange="checkUrl(this)">
             <div id="error" class="text-danger"></div>
             <div id="name" class="text-success"></div>
             <div class="d-flex justify-content-between">

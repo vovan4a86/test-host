@@ -82,11 +82,12 @@ function getNameFromUrl() {
     })
 }
 
-function getImage(elem) {
+function checkUrl(elem) {
     err.empty();
     if(!switchUrl.is(':checked')) {
         const result = $(elem).val().startsWith("https://youtu.be/");
         if(!result) {
+            nameDiv.empty();
             err.text('Ссылка должна начинаться с https://youtu.be/')
             btn.prop('disabled', true);
             return
@@ -95,6 +96,7 @@ function getImage(elem) {
         url = urlInput.val();
     } else {
         if(urlInput.val().length < 5) {
+            nameDiv.empty();
             err.text('Проверьте ID видео');
             btn.prop('disabled', true);
             return;
