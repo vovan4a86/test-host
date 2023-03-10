@@ -16,6 +16,11 @@
                         onclick="clearInfo()">Очистить
                 </button>
             </div>
+{{--            <picture>--}}
+{{--                <source type="image/webp" srcset="/output/sample1.webp">--}}
+{{--                <img class="d-block" src="/output/sample1.webp"--}}
+{{--                     width="360" height="203" style="border-radius: 12px;">--}}
+{{--            </picture>--}}
         </div>
         <div id="res"></div>
     </div>

@@ -28,7 +28,6 @@ function getFileFromUrl(e) {
                 img = `
                       <picture>
                       <source type="image/webp" srcset="${response.thumb}">
-                      <source type="image/jpeg" srcset="">
                       <img class="d-block" src="${response.thumb}"
                            width="360" height="203" style="border-radius: 12px;">
                       </picture>`;
