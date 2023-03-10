@@ -53,14 +53,20 @@ class PageController extends Controller {
         //yt-dlp -f ba -x --audio-format mp3 --downloader=aria2c --downloader--args '--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16' $URL_HERE
 
         $process = new Process(array('yt-dlp',
-            '-f ba',
-            '-x --audio-format mp3',
+            '-f',
+            'ba',
+            '-x',
+            '--audio-format',
+            'mp3',
             '--output',
             'output/%(title)s.%(ext)s',
             '--write-thumbnail',
             '--downloader=aria2c',
-            '--downloader--args',
-            '--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16',
+            '--downloader-args',
+            '--min-split-size=1M',
+            '--max-connection-per-server=16',
+            '--max-concurrent-downloads=16',
+            '--split=16',
             $url
         ));
         $process->run();
