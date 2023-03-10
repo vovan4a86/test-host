@@ -26,15 +26,16 @@ function getFileFromUrl(e) {
             let img = '';
             if (response.webp) {
                 img = `
-                          <picture>
-                          <source type="image/webp" srcset="${response.thumb}">
-                          <source type="image/jpeg" srcset="">
-                          <img class="d-block" src="${response.thumb}" width="360" height="203" style="border-radius: 12px;">
-                          </picture>`;
+                      <picture>
+                      <source type="image/webp" srcset="${response.thumb}">
+                      <source type="image/jpeg" srcset="">
+                      <img class="d-block" src="${response.thumb}"
+                           width="360" height="203" style="border-radius: 12px;">
+                      </picture>`;
             } else {
                 img = `
-                            <img class="d-block" src="${response.thumb}"
-                            width="360" height="203" style="border-radius: 12px;">`;
+                    <img class="d-block" src="${response.thumb}"
+                         width="360" height="203" style="border-radius: 12px;">`;
             }
 
             const name = `<div>${response.name}</div>

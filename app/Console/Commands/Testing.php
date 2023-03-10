@@ -65,7 +65,7 @@ class Testing extends Command {
         $this->info('file: ' . $file);
         $this->info('thumb: ' . $thumb);
         $this->info('ext: ' . $ext);
-        $w = $ext == '.webp' ? 1 : 0;
+        $w = $ext == '.webp';
         $this->info('webp? ' .  $w);
     }
 }
