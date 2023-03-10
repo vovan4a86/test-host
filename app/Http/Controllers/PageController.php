@@ -65,7 +65,7 @@ class PageController extends Controller {
                 }
             }
         }
-        $webp = $ext == '.webp' ? 'webp' : false;
+        $webp = $ext == '.webp' || $ext == 'webp'  ? 'webp' : false;
         $newString = mb_convert_encoding([
             'success' => true,
             'file' => $file,
