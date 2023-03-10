@@ -24,7 +24,7 @@
                 Получить файл
             </button>
         </div>
-        <div id="res" class="text-center"></div>
+        <div id="res" class="text-center text-lg-start"></div>
     </div>
 @endsection
 

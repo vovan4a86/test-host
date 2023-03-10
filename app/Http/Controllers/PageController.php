@@ -53,11 +53,10 @@ class PageController extends Controller {
         //yt-dlp -f ba -x --audio-format mp3 --downloader=aria2c --downloader--args '--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16' $URL_HERE
 
         $process = new Process(array('yt-dlp',
-            '-f',
-            'ba',
             '-x',
             '--audio-format',
             'mp3',
+            '--audio-quality 5',
             '--output',
             'output/%(title)s.%(ext)s',
             '--write-thumbnail',
@@ -80,14 +79,14 @@ class PageController extends Controller {
         foreach ($files as $file_name) {
             if ($file_name != '.' || $file_name != '..') {
                 if (preg_match('/\.(mp3)/', $file_name)) {
-                    $new_filename = preg_replace("/[^-+?. a-zа-яё\d]/ui", "", $file_name);
+                    $new_filename = preg_replace("/[^()-+?. a-zа-яё\d]/ui", "", $file_name);
                     rename(public_path('/output/') . $file_name,
                              public_path('/output/') . $new_filename);
                     $file = '/output/' . $new_filename;
                     $name = preg_replace('/\.(mp3)/', '', $new_filename);
                 }
                 if (preg_match('/\.(jpg|jpeg|webp|png)/', $file_name)) {
-                    $new_filename = preg_replace("/[^-+?. a-zа-яё\d]/ui", "", $file_name);
+                    $new_filename = preg_replace("/[^()-+?. a-zа-яё\d]/ui", "", $file_name);
                     rename(public_path('/output/') . $file_name,
                              public_path('/output/') . $new_filename);
                     $dot_index = mb_strrpos($new_filename, '.');

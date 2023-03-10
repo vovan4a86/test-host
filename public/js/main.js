@@ -72,6 +72,7 @@ function getNameFromUrl() {
             res.empty();
         },
         success: function (response) {
+            btn.prop('disabled', false);
             nameDiv.empty();
             nameDiv.html(response.text);
         },
