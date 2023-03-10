@@ -26,13 +26,15 @@ function getFileFromUrl(e) {
             let img = '';
             if (response.webp == 'webp') {
                 img = `
+                      <h1>webp</h1>
                       <picture>
                       <source type="image/webp" srcset="${response.thumb}">
                       <img class="d-block" src="${response.thumb}"
-                           width="360" height="203" style="border-radius: 12px;">
+                           width="360" height="200" style="border-radius: 12px;">
                       </picture>`;
             } else {
                 img = `
+                    <h1>img</h1>
                     <img class="d-block" src="${response.thumb}"
                          width="360" height="203" style="border-radius: 12px;">`;
             }
