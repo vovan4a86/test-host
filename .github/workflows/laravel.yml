@@ -40,4 +40,5 @@ jobs:
           password: ${{secrets.SSH_PRIVATE_KEY}}
           commands: |
             cd ${{ secrets.PROJECT_FOLDER }};
+            php artisan route:cache;
             git pull;
