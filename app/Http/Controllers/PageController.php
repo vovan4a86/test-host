@@ -60,6 +60,8 @@ class PageController extends Controller {
             '5',
             '--output',
             'output/%(title)s.%(ext)s',
+            '--socket-timeout',
+            '180'
             '--write-thumbnail',
             '--downloader=aria2c',
             '--downloader-args',
