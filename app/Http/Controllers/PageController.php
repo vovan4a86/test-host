@@ -68,6 +68,7 @@ class PageController extends Controller {
             '\'--min-split-size=1M --max-connection-per-server=16 --max-concurrent-downloads=16 --split=16\'',
             $url
         ));
+        $process->setTimeout(3600);
         $process->run();
 
         if (!$process->isSuccessful()) {
