@@ -33,12 +33,14 @@ class PageController extends Controller {
             throw new ProcessFailedException($process);
         }
 
-        return ['text' => $process->getOutput()];
+        $newString = mb_convert_encoding([
+            'text' => $process->getOutput(),
+        ], "UTF-8", "auto");
+        return response()->json($newString);
     }
 
     public function getFile() {
         $url = \request('url');
-
         array_map("unlink", glob(public_path('/output/*.*')));
 
 //        $process = new Process(array('yt-dlp',
@@ -60,8 +62,6 @@ class PageController extends Controller {
             '5',
             '--output',
             'output/%(title)s.%(ext)s',
-            '--socket-timeout',
-            '180',
             '--write-thumbnail',
             '--downloader=aria2c',
             '--downloader-args',
@@ -109,7 +109,6 @@ class PageController extends Controller {
         ], "UTF-8", "auto");
         return response()->json($newString);
     }
-
 
     public function showGoogleApi() {
         return view('pages.google-api-view');

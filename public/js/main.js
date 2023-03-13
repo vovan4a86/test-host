@@ -10,6 +10,7 @@ function getFileFromUrl() {
     $.ajax({
         url: "/get-file",
         type: "POST",
+        contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
         data: {
             "_token": $('meta[name="csrf-token"]').attr('content'),
             url: url,
@@ -95,7 +96,7 @@ function checkUrl(elem) {
             return
         }
         btn.prop('disabled', false);
-        url = urlInput.val();
+        url = $(elem).val();
     } else {
         if(urlInput.val().length < 5) {
             nameDiv.empty();
@@ -103,11 +104,13 @@ function checkUrl(elem) {
             btn.prop('disabled', true);
             return;
         }
-        url = 'https://youtu.be/' + urlInput.val();
+        url = 'https://youtu.be/' + $(elem).val();
         btn.prop('disabled', false);
     }
     getNameFromUrl();
 }
+//https://youtu.be/r1y_8HrOf5Q
+//https://youtu.be/r1y_8HrOf5Q
 
 function clearInfo() {
     urlInput.val('');
