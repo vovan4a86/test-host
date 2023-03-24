@@ -39,9 +39,13 @@ class PageController extends Controller {
         return response()->json($newString);
     }
 
+    public function deleteFiles() {
+        array_map("unlink", glob(public_path('/output/*.*')));
+    }
+
     public function getFile() {
         $url = \request('url');
-        array_map("unlink", glob(public_path('/output/*.*')));
+        $this->deleteFiles();
 
 //        $process = new Process(array('yt-dlp',
 //            '--output',

@@ -24,8 +24,9 @@ function getFileFromUrl() {
             res.empty();
         },
         success: function (response) {
-            btn.prop('disabled', false);
+            btn.prop('disabled', true);
             btn.html('Получить файл');
+            nameDiv.empty();
             let img = '';
             if (response.webp) {
                 img = `
@@ -40,7 +41,7 @@ function getFileFromUrl() {
                          width="360" height="203" style="border-radius: 12px;">`;
             }
 
-            const name = `<div class="mt-2">${response.name}</div>
+            const name = `<div class="mt-2 text-white">${response.name}</div>
                           <a href="${response.file}" type="audio/mp3" download class="btn btn-success mt-2 btn-lg">Скачать</a>`
             res.append(img);
             res.append(name);
@@ -110,13 +111,28 @@ function checkUrl(elem) {
     getNameFromUrl();
 }
 //https://youtu.be/r1y_8HrOf5Q
-//https://youtu.be/r1y_8HrOf5Q
 
 function clearInfo() {
     urlInput.val('');
     err.empty();
     res.empty();
     nameDiv.empty();
+    // switchUrl.prop('checked', false);
+    $.ajax({
+        url: "/delete-files",
+        type: "POST",
+        data: {
+            "_token": $('meta[name="csrf-token"]').attr('content'),
+            url: url,
+        },
+        beforeSend: function () {},
+        success: function (response) {
+            console.log('Folder clear')
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText);
+        }
+    })
 }
 
 

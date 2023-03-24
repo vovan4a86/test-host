@@ -8,7 +8,10 @@ Route::get('/ytdlp', 'PageController@showYtdlp')->name('ytdlp');
 
 Route::post('/get-file', 'PageController@getFile');
 
+Route::post('/delete-files', 'PageController@deleteFiles');
+
 Route::post('/get-name', 'PageController@getName');
+
 
 
 Route::get('/google-api', 'PageController@showGoogleApi')->name('google-api');
