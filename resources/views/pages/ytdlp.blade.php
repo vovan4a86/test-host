@@ -18,7 +18,7 @@
         </div>
         <div class="mb-3">
             <input type="text" class="form-control d-block my-3" id="yt" value=""
-                   oninput="checkUrl(this)" onchange="checkUrl(this)">
+                   oninput="checkUrl(this)">
             <div id="error" class="text-danger"></div>
             <div id="name" class="text-success"></div>
             <button class="btn btn-primary mt-2" type="button" disabled
