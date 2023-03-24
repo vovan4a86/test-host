@@ -89,15 +89,22 @@ function checkUrl(elem) {
     err.empty();
     btn.prop('disabled', true);
     if(!switchUrl.is(':checked')) {
-        const result = $(elem).val().startsWith("https://youtu.be/");
-        if(!result) {
+        const link = $(elem).val().startsWith("https://youtu.be/");
+        let linkLive = $(elem).val().startsWith("https://www.youtube.com/live/");
+        if(!link && !linkLive) {
             nameDiv.empty();
             err.text('Ссылка должна начинаться с https://youtu.be/')
             btn.prop('disabled', true);
             return
+        } else if (linkLive) {
+           let str = urlInput.val().replace('https://www.youtube.com/live/', '');
+           let index = str.indexOf('?');
+           url = str.slice(0, index);
+            btn.prop('disabled', false);
+        } else {
+            btn.prop('disabled', false);
+            url = $(elem).val();
         }
-        btn.prop('disabled', false);
-        url = $(elem).val();
     } else {
         if(urlInput.val().length < 5) {
             nameDiv.empty();
@@ -110,7 +117,8 @@ function checkUrl(elem) {
     }
     getNameFromUrl();
 }
-//https://youtu.be/r1y_8HrOf5Q
+// https://youtu.be/r1y_8HrOf5Q
+// https://www.youtube.com/live/9GF-4W6Bp2o?feature=share
 
 function clearInfo() {
     urlInput.val('');
