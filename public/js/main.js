@@ -53,8 +53,8 @@ function getFileFromUrl() {
                           <p>Error!</p>
                           <p class="text-info">${request.responseText}</p></div>`
             res.append(name);
-            console.log(request.responseText);
-            console.log(status);
+            console.log(request);
+            console.log(error);
         }
     });
 }
