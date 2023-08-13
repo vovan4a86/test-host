@@ -5,7 +5,6 @@ let nameDiv = $('#name');
 let urlInput = $('#yt');
 let switchUrl = $('#switchUrl');
 let url = '';
-console.log('valera!');
 
 function getFileFromUrl() {
     $.ajax({

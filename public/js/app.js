@@ -19379,6 +19379,7 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./main */ "./resources/js/main.js");
 
 /***/ }),
 
@@ -19416,6 +19417,160 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/main.js":
+/*!******************************!*\
+  !*** ./resources/js/main.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var res = $('#res');
+var btn = $('button.btn.btn-primary');
+var err = $('#error');
+var nameDiv = $('#name');
+var urlInput = $('#yt');
+var switchUrl = $('#switchUrl');
+var url = '';
+function getFileFromUrl() {
+  $.ajax({
+    url: "/get-file",
+    type: "POST",
+    contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
+    data: {
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+      url: url
+    },
+    beforeSend: function beforeSend() {
+      btn.prop('disabled', true);
+      btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>' + ' Скачивние...');
+      res.empty();
+    },
+    success: function success(response) {
+      btn.prop('disabled', true);
+      btn.html('Получить файл');
+      nameDiv.empty();
+      var img = '';
+      if (response.webp) {
+        img = "\n                      <picture>\n                      <source type=\"image/webp\" srcset=\"".concat(response.thumb, "\">\n                      <img class=\"d-block mx-auto mx-lg-0\" src=\"").concat(response.thumb, "\"\n                           width=\"360\" height=\"203\" style=\"border-radius: 12px;\">\n                      </picture>");
+      } else {
+        img = "\n                    <img class=\"d-block\" src=\"".concat(response.thumb, "\"\n                         width=\"360\" height=\"203\" style=\"border-radius: 12px;\">");
+      }
+      var name = "<div class=\"mt-2 text-white\">".concat(response.name, "</div>\n                          <a href=\"").concat(response.file, "\" type=\"audio/mp3\" download class=\"btn btn-success mt-2 btn-lg\">\u0421\u043A\u0430\u0447\u0430\u0442\u044C</a>");
+      res.append(img);
+      res.append(name);
+    },
+    error: function error(request, status, _error) {
+      btn.prop('disabled', true);
+      btn.html('Получить файл');
+      var name = "<div class=\"text-danger\">\n                          <p>Error!</p>\n                          <p class=\"text-info\">".concat(request.responseText, "</p></div>");
+      res.append(name);
+      console.log(request);
+      console.log(_error);
+    }
+  });
+}
+function getNameFromUrl() {
+  $.ajax({
+    url: "/get-name",
+    type: "POST",
+    data: {
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+      url: url
+    },
+    beforeSend: function beforeSend() {
+      nameDiv.html('<div class="spinner-grow spinner-grow-sm text-primary" role="status">\n' + '  <span class="visually-hidden"></span>\n' + '</div>');
+      res.empty();
+    },
+    success: function success(response) {
+      btn.prop('disabled', false);
+      nameDiv.empty();
+      nameDiv.html(response.text);
+    },
+    error: function error(request, status, _error2) {
+      nameDiv.html('Не удалось получить имя');
+      console.log(request.responseText);
+    }
+  });
+}
+function checkUrl(elem) {
+  err.empty();
+  btn.prop('disabled', true);
+  if (!switchUrl.is(':checked')) {
+    var link = $(elem).val().startsWith("https://youtu.be/");
+    var linkLive = $(elem).val().startsWith("https://www.youtube.com/live/");
+    if (!link && !linkLive) {
+      nameDiv.empty();
+      err.text('Ссылка должна начинаться с https://youtu.be/');
+      btn.prop('disabled', true);
+      return;
+    } else if (linkLive) {
+      var str = urlInput.val().replace('https://www.youtube.com/live/', '');
+      var index = str.indexOf('?');
+      url = str.slice(0, index);
+      btn.prop('disabled', false);
+    } else {
+      btn.prop('disabled', false);
+      url = $(elem).val();
+    }
+  } else {
+    if (urlInput.val().length < 5) {
+      nameDiv.empty();
+      err.text('Проверьте ID видео');
+      btn.prop('disabled', true);
+      return;
+    }
+    url = 'https://youtu.be/' + $(elem).val();
+    btn.prop('disabled', false);
+  }
+  getNameFromUrl();
+}
+// https://youtu.be/r1y_8HrOf5Q
+// https://www.youtube.com/live/9GF-4W6Bp2o?feature=share
+
+function clearInfo() {
+  urlInput.val('');
+  err.empty();
+  res.empty();
+  nameDiv.empty();
+  // switchUrl.prop('checked', false);
+  $.ajax({
+    url: "/delete-files",
+    type: "POST",
+    data: {
+      "_token": $('meta[name="csrf-token"]').attr('content'),
+      url: url
+    },
+    beforeSend: function beforeSend() {},
+    success: function success(response) {
+      console.log('Folder clear');
+    },
+    error: function error(request, status, _error3) {
+      console.log(request.responseText);
+    }
+  });
+}
+function sendIndexNow() {
+  var token = $('meta[name="csrf-token"]').attr('content');
+
+  // console.log(token);
+  $.ajax({
+    url: "/send-index-now",
+    type: "POST",
+    data: {
+      "_token": token
+    },
+    success: function success(response) {
+      console.log(response);
+    },
+    error: function error(xhr, status, _error4) {
+      console.log("Error!" + xhr.status);
+      console.log("Error!" + _error4);
+    }
+  });
+}
 
 /***/ }),
 
