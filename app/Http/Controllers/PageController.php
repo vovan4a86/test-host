@@ -77,6 +77,7 @@ class PageController extends Controller {
 
         if (!$process->isSuccessful()) {
             Debugbar::log($process->getErrorOutput());
+            return response()->json($process->getErrorOutput());
             throw new ProcessFailedException($process);
         }
 
