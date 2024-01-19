@@ -3,7 +3,7 @@
 @section('title', 'Скачать аудио с YT')
 
 @section('content')
-    <h1 class="mt-3 text-center">Скачать аудио с YT</h1>
+    <h1 class="mt-3 text-center">Скачать аудио с YT:</h1>
     <div class="mb-3 mt-3">
         <div class="d-flex justify-content-between">
             <div class="form-check form-switch d-flex align-items-center">
