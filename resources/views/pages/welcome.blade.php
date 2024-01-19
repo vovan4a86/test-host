@@ -76,7 +76,7 @@
 
         <div class="content">
             <div class="title m-b-md">
-                Laravel Links
+                Try Laravel Links
             </div>
 
             <div class="links">
